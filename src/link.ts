@@ -1,12 +1,11 @@
+import axios, { AxiosRequestConfig } from 'axios';
 import { URL } from 'url';
 import { z, ZodSchema } from 'zod';
 
-import axios, { AxiosRequestConfig } from 'axios';
-
-interface ApiError {
+type ApiError = {
   error: true;
   message: string;
-}
+};
 
 function isError(payload: unknown): payload is ApiError {
   // TODO: Make this better by using zod ...
@@ -42,11 +41,6 @@ async function performRequest<
   }
 }
 
-/**
- * Responsible for requesting data from the bugzilla instance handling any
- * necessary authentication and error handling that must happen. The chief
- * access is through the `get`, `post` and `put` methods.
- */
 export abstract class TestingFarmLink {
   protected readonly instance: URL;
 
@@ -102,20 +96,3 @@ export class PublicLink extends TestingFarmLink {
     return performRequest(config, schema);
   }
 }
-
-// TODO ...
-// /**
-//  * Handles authentication using an API key.
-//  */
-// export class ApiKeyLink extends TestingFarmLink {
-//   constructor(instance: string, private readonly apiKey: string) {
-//     super(instance);
-//   }
-
-//   protected async request<T>(
-//     config: AxiosRequestConfig,
-//     validator: Validator<T>
-//   ): Promise<T> {
-//     return performRequest(config, validator);
-//   }
-// }
