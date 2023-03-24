@@ -1,0 +1,41 @@
+---
+
+name: Linting suite
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+
+      - name: Use Node.js 18.x
+        uses: actions/setup-node@ae9f0f7448e93b1be0f44663e79763dbdffcc4da
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Prettier
+        run: yarn run format-check
+
+      - name: ESLint
+        run: yarn run lint
+
+...
