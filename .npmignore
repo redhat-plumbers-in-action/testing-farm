@@ -1,6 +1,7 @@
 /.github
 /coverage
 /vite.config.ts
+/renovate.json
 /tsconfig.*
 /test
 
