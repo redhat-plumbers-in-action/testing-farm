@@ -25,11 +25,7 @@ const testObjectSchema = z.object({
       ref: z.string().min(1),
       merge_sha: z.string().min(1).optional(),
       playbooks: z.array(z.string().min(1)).optional(),
-      extra_variables: z
-        .object({
-          // [key: string]: string;
-        })
-        .optional(),
+      extra_variables: z.record(z.string()).optional(),
     })
     .optional(),
 });
@@ -42,16 +38,8 @@ const environmentSchema = z.object({
     })
     .optional(),
   pool: z.string().min(1).optional(),
-  variables: z
-    .object({
-      // [key: string]: string;
-    })
-    .optional(),
-  secrets: z
-    .object({
-      // [key: string]: string;
-    })
-    .optional(),
+  variables: z.record(z.string()).optional(),
+  secrets: z.record(z.string()).optional(),
   artifacts: z
     .array(
       z.object({
@@ -79,11 +67,7 @@ const environmentSchema = z.object({
       provisioning: z
         .object({
           post_install_script: z.string().min(1).optional(),
-          tags: z
-            .object({
-              // [key: string]: string;
-            })
-            .optional(),
+          tags: z.record(z.string()).optional(),
         })
         .optional(),
     })
