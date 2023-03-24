@@ -1,0 +1,8 @@
+/.github
+/coverage
+/vite.config.ts
+/tsconfig.*
+/test
+
+*.tsbuildinfo
+.*
