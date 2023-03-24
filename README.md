@@ -1,5 +1,22 @@
 # Testing Farm
 
+[![npm version][npm-status]][npm] [![Unit tests][test-status]][test] [![Linting suite][lint-status]][lint] [![CodeQL][codeql-status]][codeql] [![codecov][codecov-status]][codecov]
+
+[npm]: https://www.npmjs.com/package/testing-farm
+[npm-status]: https://badgen.net/npm/v/testing-farm
+
+[test]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/tests.yml
+[test-status]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/tests.yml/badge.svg
+
+[lint]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/lint.yml
+[lint-status]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/lint.yml/badge.svg
+
+[codeql]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/codeql-analysis.yml
+[codeql-status]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/codeql-analysis.yml/badge.svg
+
+[codecov]: https://codecov.io/github/redhat-plumbers-in-action/testing-farm
+[codecov-status]: https://codecov.io/github/redhat-plumbers-in-action/testing-farm/branch/main/graph/badge.svg?token=EqTfXgwKz2
+
 Typesafe access to [Testing Farm's REST API](https://testing-farm.gitlab.io/api/).
 
 ## API
