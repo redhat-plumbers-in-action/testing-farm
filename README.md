@@ -42,7 +42,7 @@ const response = await api.newRequest(request);
 
 ### Test Request Details
 
-documentation of - [`GET /requests`](https://testing-farm.gitlab.io/api/#operation/requestsGet)
+documentation of - [`GET /requests/{request_id}`](https://testing-farm.gitlab.io/api/#operation/requestsGet)
 
 ```typescript
 const details = await api.requestDetails('test-id');
