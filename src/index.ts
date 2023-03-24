@@ -42,8 +42,8 @@ export default class TestingFarmAPI {
   }
 
   async ranchComposes(ranch: Ranch): Promise<Composes> {
-    const data = ranchSchema.parse(ranch);
-    return this.link.get('composes', composesSchema, data);
+    const requestedRanch = ranchSchema.parse(ranch);
+    return this.link.get(`composes/${requestedRanch}`, composesSchema);
   }
 
   async about(): Promise<About> {
