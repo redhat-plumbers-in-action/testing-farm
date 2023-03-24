@@ -18,6 +18,8 @@ import {
   requestSchema,
 } from './schema';
 
+export type { Ranch, NewRequest, NewRequestResponse, Request, Composes, About };
+
 export default class TestingFarmAPI {
   private readonly link: PublicLink;
 
