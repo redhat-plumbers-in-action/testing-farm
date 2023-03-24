@@ -1,9 +1,22 @@
-// import type {} from './schema';
-
 import { PublicLink } from './link';
-import { urlSchema } from './schema';
-
-export type {} from './schema';
+import type {
+  About,
+  Composes,
+  NewRequest,
+  NewRequestResponse,
+  Ranch,
+  Request,
+} from './schema';
+import {
+  composesSchema,
+  aboutSchema,
+  urlSchema,
+  ranchSchema,
+  newRequestResponseSchema,
+  newRequestSchema,
+  requestIdSchema,
+  requestSchema,
+} from './schema';
 
 export default class TestingFarmAPI {
   private readonly link: PublicLink;
@@ -12,23 +25,26 @@ export default class TestingFarmAPI {
     this.link = new PublicLink(urlSchema.parse(instance));
   }
 
-  //   newRequest(data: NewRequest): Promise<Request> {
-  //     return this.link.post('requests', data);
-  //   }
+  async newRequest(request: NewRequest): Promise<NewRequestResponse> {
+    const data = newRequestSchema.parse(request);
+    return this.link.post('requests', newRequestResponseSchema, data);
+  }
 
-  //   requestDetails(requestId: string): Promise<Request> {
-  //     return this.link.get('requests', requestId);
-  //   }
+  async requestDetails(requestId: string): Promise<Request> {
+    const data = requestIdSchema.parse(requestId);
+    return this.link.get('requests', requestSchema, data);
+  }
 
-  //   composes(): Promise<Compose[]> {
-  //     return this.link.get('composes');
-  //   }
+  async composes(): Promise<Composes> {
+    return this.link.get('composes', composesSchema);
+  }
 
-  //   ranchComposes(ranch: unknown): Promise<Compose[]> {
-  //     return this.link.get('composes', data);
-  //   }
+  async ranchComposes(ranch: Ranch): Promise<Composes> {
+    const data = ranchSchema.parse(ranch);
+    return this.link.get('composes', composesSchema, data);
+  }
 
-  //   about(): Promise<About> {
-  //     return this.link.get('about');
-  //   }
+  async about(): Promise<About> {
+    return this.link.get('about', aboutSchema);
+  }
 }

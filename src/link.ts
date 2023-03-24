@@ -64,28 +64,36 @@ export abstract class TestingFarmLink {
     return url;
   }
 
-  async get<TSchema extends ZodSchema, KValues extends z.infer<TSchema>>(
+  async get<TSchema extends ZodSchema, KValues extends z.infer<TSchema>, D>(
     path: string,
-    schema: TSchema
+    schema: TSchema,
+    data?: D
   ): Promise<KValues> {
-    return this.request(
-      {
-        url: this.buildURL(path).toString(),
-      },
-      schema
-    );
+    const config: AxiosRequestConfig<D> = {
+      url: this.buildURL(path).toString(),
+      method: 'GET',
+    };
+
+    if (data) {
+      config.data = data;
+      config.headers = {
+        'Content-Type': 'application/json',
+      };
+    }
+
+    return this.request(config, schema);
   }
 
   async post<R, TSchema extends ZodSchema, KValues extends z.infer<TSchema>>(
     path: string,
     schema: TSchema,
-    content: R
+    data: R
   ): Promise<KValues> {
     return this.request(
       {
         url: this.buildURL(path).toString(),
         method: 'POST',
-        data: JSON.stringify(content),
+        data: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json',
         },
