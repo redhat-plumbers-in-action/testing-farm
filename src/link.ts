@@ -32,6 +32,7 @@ async function performRequest<
       throw new Error(response.data.message);
     }
 
+    console.log('test response', response.data);
     return schema.parse(response.data);
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
@@ -60,7 +61,7 @@ export abstract class TestingFarmLink {
   >(config: AxiosRequestConfig, schema: TSchema): Promise<KValues>;
 
   protected buildURL(path: string): URL {
-    let url = new URL(path, this.instance);
+    let url = new URL(`${this.instance.pathname}/${path}`, this.instance);
     return url;
   }
 
