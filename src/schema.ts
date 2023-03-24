@@ -147,39 +147,51 @@ const noteSchema = z.object({
 
 export const requestSchema = z.object({
   id: requestIdSchema,
+  user_id: z.string(),
   created: z.string(),
   updated: z.string(),
-  environments: z.array(
+  environments_requested: z.array(
     z.object({
       arch: z.string(),
+      artifacts: z.any(),
+      hardware: z.any(),
       os: z.object({
         compose: z.string(),
       }),
-      pool: z.string(),
-      variables: z.object({
-        // [key: string]: string
+      pool: z.union([z.string(), z.null()]),
+      settings: z.object({
+        pipeline: z.any(),
+        provisioning: z.any(),
       }),
+      tmt: z.object({
+        context: z.object({}),
+      }),
+      variables: z.record(z.string()),
     })
   ),
   state: z.string(),
   notes: z.array(noteSchema),
   result: z.object({
-    summary: z.string(),
+    summary: z.union([z.string(), z.null()]),
     overall: z.string(),
     xunit: z.string(),
   }),
   run: z.object({
-    console: urlSchema,
-    stages: z.array(
-      z.object({
-        name: z.string(),
-        notes: z.array(noteSchema),
-        result: z.string(),
-        log: urlSchema,
-      })
-    ),
+    console: z.union([urlSchema, z.null()]),
+    stages: z.union([
+      z.array(
+        z.object({
+          name: z.string(),
+          notes: z.array(noteSchema),
+          result: z.string(),
+          log: urlSchema,
+        })
+      ),
+      z.null(),
+    ]),
     artifacts: urlSchema,
   }),
+  settings: z.any(),
 });
 
 export type Request = z.infer<typeof requestSchema>;
