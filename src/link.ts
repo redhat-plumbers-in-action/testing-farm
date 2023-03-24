@@ -32,7 +32,6 @@ async function performRequest<
       throw new Error(response.data.message);
     }
 
-    console.log('test response', response.data);
     return schema.parse(response.data);
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
