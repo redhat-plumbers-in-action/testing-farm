@@ -9,4 +9,12 @@ describe('Test Testing Farm GET /about', () => {
     const response = await api.about();
     expect(response).toBeDefined();
   });
+
+  test('error', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.0');
+
+    await expect(api.about()).rejects.toThrowErrorMatchingInlineSnapshot(
+      '"\\"Not Found\\""'
+    );
+  });
 });
