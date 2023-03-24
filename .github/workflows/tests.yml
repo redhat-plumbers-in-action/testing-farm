@@ -1,6 +1,6 @@
 ---
 
-name: Unit tests
+name: Tests
 
 on:
   push:
@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   test:
-    name: Unit Tests - Node.js
+    name: Tests - Node.js
     runs-on: ubuntu-latest
 
     strategy:
