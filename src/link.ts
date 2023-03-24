@@ -1,7 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { URL } from 'url';
 import { z, ZodSchema } from 'zod';
-import { errorResponseSchema } from './schema';
 
 async function performRequest<
   TSchema extends ZodSchema,
@@ -16,16 +15,10 @@ async function performRequest<
       },
     });
 
-    if (response.status != 200) {
-      const errorResponse = errorResponseSchema.parse(response.data);
-
-      throw new Error(JSON.stringify(errorResponse));
-    }
-
     return schema.parse(response.data);
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
-      throw new Error(e.message);
+      throw new Error(JSON.stringify(e.response?.data));
     } else {
       throw e;
     }

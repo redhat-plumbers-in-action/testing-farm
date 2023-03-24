@@ -62,4 +62,14 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
       }
     `);
   });
+
+  test('non-existent request_id', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+
+    await expect(
+      api.requestDetails('request_id')
+    ).rejects.toThrowErrorMatchingInlineSnapshot(
+      '"{\\"code\\":404,\\"message\\":\\"No such entity\\"}"'
+    );
+  });
 });
