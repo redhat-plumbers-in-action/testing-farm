@@ -1,0 +1,78 @@
+---
+
+name: Publish package
+
+on:
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
+        with:
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: yarn.lock
+
+      - name: Install
+        run: yarn install
+
+      - name: Compile
+        run: yarn build
+
+      - name: Test
+        run: yarn test
+
+  publish-github:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - name: Test
+        run: yarn test
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - name: Test
+        run: yarn test
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+
+...
