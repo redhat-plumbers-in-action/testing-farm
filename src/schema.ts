@@ -201,7 +201,8 @@ export const composesSchema = z.object({
 export type Composes = z.infer<typeof composesSchema>;
 
 export const aboutSchema = z.object({
-  api_version: z.string(),
+  version: z.string(),
+  release_notes: z.string(),
 });
 
 export type About = z.infer<typeof aboutSchema>;
