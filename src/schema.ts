@@ -202,3 +202,10 @@ export const aboutSchema = z.object({
 });
 
 export type About = z.infer<typeof aboutSchema>;
+
+export const errorResponseSchema = z.object({
+  code: z.number(),
+  message: z.string(),
+});
+
+export type ErrorResponse = z.infer<typeof errorResponseSchema>;

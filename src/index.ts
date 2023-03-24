@@ -6,6 +6,7 @@ import type {
   NewRequestResponse,
   Ranch,
   Request,
+  ErrorResponse,
 } from './schema';
 import {
   composesSchema,
@@ -18,7 +19,15 @@ import {
   requestSchema,
 } from './schema';
 
-export type { Ranch, NewRequest, NewRequestResponse, Request, Composes, About };
+export type {
+  Ranch,
+  NewRequest,
+  NewRequestResponse,
+  Request,
+  Composes,
+  About,
+  ErrorResponse,
+};
 
 export default class TestingFarmAPI {
   private readonly link: PublicLink;

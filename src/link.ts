@@ -1,18 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { URL } from 'url';
 import { z, ZodSchema } from 'zod';
-
-type ApiError = {
-  error: true;
-  message: string;
-};
-
-function isError(payload: unknown): payload is ApiError {
-  // TODO: Make this better by using zod ...
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return payload && typeof payload == 'object' && payload.error;
-}
+import { errorResponseSchema } from './schema';
 
 async function performRequest<
   TSchema extends ZodSchema,
@@ -27,8 +16,10 @@ async function performRequest<
       },
     });
 
-    if (isError(response.data)) {
-      throw new Error(response.data.message);
+    if (response.status != 200) {
+      const errorResponse = errorResponseSchema.parse(response.data);
+
+      throw new Error(JSON.stringify(errorResponse));
     }
 
     return schema.parse(response.data);
