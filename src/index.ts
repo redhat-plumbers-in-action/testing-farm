@@ -33,8 +33,8 @@ export default class TestingFarmAPI {
   }
 
   async requestDetails(requestId: string): Promise<Request> {
-    const data = requestIdSchema.parse(requestId);
-    return this.link.get('requests', requestSchema, data);
+    const id = requestIdSchema.parse(requestId);
+    return this.link.get(`requests/${id}`, requestSchema);
   }
 
   async composes(): Promise<Composes> {
