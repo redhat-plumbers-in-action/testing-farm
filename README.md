@@ -14,7 +14,7 @@
 [codeql]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/codeql-analysis.yml
 [codeql-status]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/codeql-analysis.yml/badge.svg
 
-[codecov]: https://codecov.io/github/redhat-plumbers-in-action/testing-farm
+[codecov]: https://app.codecov.io/gh/redhat-plumbers-in-action/testing-farm
 [codecov-status]: https://codecov.io/github/redhat-plumbers-in-action/testing-farm/branch/main/graph/badge.svg?token=EqTfXgwKz2
 
 Typesafe access to [Testing Farm's REST API](https://testing-farm.gitlab.io/api/).
