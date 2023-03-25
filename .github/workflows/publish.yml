@@ -28,6 +28,9 @@ jobs:
       - name: Compile
         run: yarn build
 
+      - name: Lint
+        run: yarn run lint
+
       - name: Test
         run: yarn test
 
@@ -48,9 +51,6 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
 
-      - name: Test
-        run: yarn test
-
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,9 +67,6 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
-
-      - name: Test
-        run: yarn test
 
       - run: npm publish
         env:
