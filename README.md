@@ -1,6 +1,6 @@
 # Testing Farm
 
-[![npm version][npm-status]][npm] [![Unit tests][test-status]][test] [![Linting suite][lint-status]][lint] [![CodeQL][codeql-status]][codeql] [![codecov][codecov-status]][codecov]
+[![npm version][npm-status]][npm] [![Tests][test-status]][test] [![Linters][lint-status]][lint] [![CodeQL][codeql-status]][codeql] [![codecov][codecov-status]][codecov]
 
 [npm]: https://www.npmjs.com/package/testing-farm
 [npm-status]: https://badgen.net/npm/v/testing-farm
