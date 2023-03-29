@@ -51,6 +51,12 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
 
+      - name: Install
+        run: yarn install
+
+      - name: Compile
+        run: yarn build
+
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,6 +73,12 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
+
+      - name: Install
+        run: yarn install
+
+      - name: Compile
+        run: yarn build
 
       - run: npm publish
         env:
