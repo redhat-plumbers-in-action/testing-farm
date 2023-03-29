@@ -1,6 +1,6 @@
 {
   "name": "testing-farm",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "A NodeJS module to access Testing Farm instances through the REST API.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
