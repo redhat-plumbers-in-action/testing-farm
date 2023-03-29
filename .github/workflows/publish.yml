@@ -10,21 +10,17 @@ permissions:
   contents: read
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
 
-      - name: Use LTS Node.js
+      - name: Use Node.js 18
         uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
         with:
-          node-version: lts/*
-          ache-dependency-path: yarn.lock
+          node-version: 18
+          cache: yarn
+          cache-dependency-path: yarn.lock
 
       - name: Install
         run: yarn install
@@ -38,10 +34,42 @@ jobs:
       - name: Test
         run: yarn test
 
-      - name: Semantic Release - NPM & GITHUB
-        run: npx semantic-release
+  publish-github:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com/
+
+      - run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@8f4b7f84864484a7bf31766abe9204da3cbe65b3
+
+      - name: Use Node.js 18
+        uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 ...
