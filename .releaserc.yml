@@ -1,6 +1,6 @@
 ---
 
 branches:
-  - refs/tags/v*.*.*
+  - main
 
 ...
