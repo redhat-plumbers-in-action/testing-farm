@@ -1,5 +1,6 @@
 import { PublicLink } from './link';
-import type {
+import { isError } from './util';
+import {
   About,
   Composes,
   NewRequest,
@@ -28,6 +29,8 @@ export type {
   About,
   ErrorResponse,
 };
+
+export { isError };
 
 export default class TestingFarmAPI {
   private readonly link: PublicLink;
