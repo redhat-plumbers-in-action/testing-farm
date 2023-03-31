@@ -10,11 +10,18 @@ describe('Test Testing Farm GET /composes/{ranch}', () => {
     expect(response).toBeDefined();
   });
 
-  test('ranch `redhat` - response', async () => {
+  test('ranch `redhat` - safe response', async () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
 
     const response = await api.ranchComposes('redhat');
     expect(response).toBeDefined();
+  });
+
+  test('ranch `redhat` - unsafe response', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+
+    const response = await api.ranchComposes('redhat', false);
+    expect(response).toBeTypeOf('object');
   });
 
   test('non-existent ranch', async () => {

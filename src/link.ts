@@ -2,10 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { URL } from 'url';
 import { z, ZodSchema } from 'zod';
 
-async function performRequest<
-  TSchema extends ZodSchema,
-  KValues extends z.infer<TSchema>
->(config: AxiosRequestConfig, schema: TSchema): Promise<KValues> {
+async function performRequest(config: AxiosRequestConfig): Promise<unknown> {
   try {
     let response = await axios.request({
       ...config,
@@ -15,7 +12,7 @@ async function performRequest<
       },
     });
 
-    return schema.parse(response.data);
+    return response.data;
   } catch (e: unknown) {
     if (axios.isAxiosError(e)) {
       throw new Error(JSON.stringify(e.response?.data));
@@ -32,33 +29,23 @@ export abstract class TestingFarmLink {
     this.instance = new URL(instance);
   }
 
-  protected abstract request<
-    TSchema extends ZodSchema,
-    KValues extends z.infer<TSchema>
-  >(config: AxiosRequestConfig, schema: TSchema): Promise<KValues>;
+  protected abstract request(config: AxiosRequestConfig): Promise<unknown>;
 
   protected buildURL(path: string): URL {
     let url = new URL(`${this.instance.pathname}/${path}`, this.instance);
     return url;
   }
 
-  async get<TSchema extends ZodSchema, KValues extends z.infer<TSchema>, D>(
-    path: string,
-    schema: TSchema
-  ): Promise<KValues> {
-    const config: AxiosRequestConfig<D> = {
+  async get(path: string): Promise<unknown> {
+    const config: AxiosRequestConfig = {
       url: this.buildURL(path).toString(),
       method: 'GET',
     };
 
-    return this.request(config, schema);
+    return this.request(config);
   }
 
-  async post<D, TSchema extends ZodSchema, KValues extends z.infer<TSchema>>(
-    path: string,
-    schema: TSchema,
-    data: D
-  ): Promise<KValues> {
+  async post<D>(path: string, data: D): Promise<unknown> {
     const config: AxiosRequestConfig<D> = {
       url: this.buildURL(path).toString(),
       method: 'POST',
@@ -68,15 +55,12 @@ export abstract class TestingFarmLink {
       },
     };
 
-    return this.request(config, schema);
+    return this.request(config);
   }
 }
 
 export class PublicLink extends TestingFarmLink {
-  protected async request<
-    TSchema extends ZodSchema,
-    KValues extends z.infer<TSchema>
-  >(config: AxiosRequestConfig, schema: TSchema): Promise<KValues> {
-    return performRequest(config, schema);
+  protected async request(config: AxiosRequestConfig): Promise<unknown> {
+    return performRequest(config);
   }
 }

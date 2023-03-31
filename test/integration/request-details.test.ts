@@ -3,7 +3,7 @@ import { expect, test, describe } from 'vitest';
 import TestingFarmAPI from '../../src/index';
 
 describe('Test Testing Farm GET /requests/{request_id}', () => {
-  test('response', async () => {
+  test('safe response', async () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
 
     const response = await api.requestDetails(
@@ -61,6 +61,16 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
         "user_id": "d690baff-bfb0-4c30-a315-e71f9daa7de6",
       }
     `);
+  });
+
+  test('unsafe response', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+
+    const response = await api.requestDetails(
+      'f053796b-452e-4da2-b4e1-26eb2f3e721f',
+      false
+    );
+    expect(response).toBeTypeOf('object');
   });
 
   test('non-existent request_id', async () => {

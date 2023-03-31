@@ -37,7 +37,8 @@ documentation of - [`POST /requests`](https://testing-farm.gitlab.io/api/#operat
 ```typescript
 const request = { /* https://testing-farm.gitlab.io/api/#operation/requestsPost */ }
 
-const response = await api.newRequest(request);
+const response: NewRequestResponse = await api.newRequest(request);
+const response: unknown = await api.newRequest(request, false);
 ```
 
 ### Test Request Details
@@ -45,7 +46,8 @@ const response = await api.newRequest(request);
 documentation of - [`GET /requests/{request_id}`](https://testing-farm.gitlab.io/api/#operation/requestsGet)
 
 ```typescript
-const details = await api.requestDetails('test-id');
+const details: Request = await api.requestDetails('test-id');
+const details: unknown = await api.requestDetails('test-id', false);
 ```
 
 ### Composes Public Ranch
@@ -53,7 +55,8 @@ const details = await api.requestDetails('test-id');
 documentation of - [`GET /composes`](https://testing-farm.gitlab.io/api/#operation/composesGetPublic)
 
 ```typescript
-const composes = await api.composes();
+const composes: Composes = await api.composes();
+const composes: unknown = await api.composes(false);
 ```
 
 ### Composes
@@ -61,7 +64,8 @@ const composes = await api.composes();
 documentation of - [`GET /composes/{ranch}`](https://testing-farm.gitlab.io/api/#operation/composesGet)
 
 ```typescript
-const composes = await api.ranchComposes('public');
+const composes: Composes = await api.ranchComposes('public');
+const composes: unknown = await api.ranchComposes('public', false);
 ```
 
 ### About Testing Farm
@@ -69,5 +73,6 @@ const composes = await api.ranchComposes('public');
 documentation of - [`GET /about`](https://testing-farm.gitlab.io/api/#operation/aboutGet)
 
 ```typescript
-const about = await api.about();
+const about: About = await api.about();
+const about: unknown = await api.about(false);
 ```

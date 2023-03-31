@@ -30,7 +30,13 @@ export type {
   ErrorResponse,
 };
 
-export { isError };
+export {
+  isError,
+  composesSchema,
+  aboutSchema,
+  newRequestResponseSchema,
+  requestSchema,
+};
 
 export default class TestingFarmAPI {
   private readonly link: PublicLink;
@@ -39,26 +45,67 @@ export default class TestingFarmAPI {
     this.link = new PublicLink(urlSchema.parse(instance));
   }
 
-  async newRequest(request: NewRequest): Promise<NewRequestResponse> {
+  async newRequest(request: NewRequest): Promise<NewRequestResponse>;
+  async newRequest(request: NewRequest, strict: boolean): Promise<unknown>;
+  async newRequest(request: NewRequest, strict?: boolean): Promise<unknown> {
     const data = newRequestSchema.parse(request);
-    return this.link.post('requests', newRequestResponseSchema, data);
+
+    if (!this.isStrict(strict)) {
+      return this.link.post('requests', data);
+    }
+
+    return newRequestResponseSchema.parse(
+      await this.link.post('requests', data)
+    );
   }
 
-  async requestDetails(requestId: string): Promise<Request> {
+  async requestDetails(requestId: string): Promise<Request>;
+  async requestDetails(requestId: string, strict: boolean): Promise<unknown>;
+  async requestDetails(requestId: string, strict?: boolean): Promise<unknown> {
     const id = requestIdSchema.parse(requestId);
-    return this.link.get(`requests/${id}`, requestSchema);
+
+    if (!this.isStrict(strict)) {
+      return this.link.get(`requests/${id}`);
+    }
+
+    return requestSchema.parse(await this.link.get(`requests/${id}`));
   }
 
-  async composes(): Promise<Composes> {
-    return this.link.get('composes', composesSchema);
+  async composes(): Promise<Composes>;
+  async composes(strict: boolean): Promise<unknown>;
+  async composes(strict?: boolean): Promise<unknown> {
+    if (!this.isStrict(strict)) {
+      return this.link.get('composes');
+    }
+
+    return composesSchema.parse(await this.link.get('composes'));
   }
 
-  async ranchComposes(ranch: Ranch): Promise<Composes> {
+  async ranchComposes(ranch: Ranch): Promise<Composes>;
+  async ranchComposes(ranch: Ranch, strict: boolean): Promise<unknown>;
+  async ranchComposes(ranch: Ranch, strict?: boolean): Promise<unknown> {
     const requestedRanch = ranchSchema.parse(ranch);
-    return this.link.get(`composes/${requestedRanch}`, composesSchema);
+
+    if (!this.isStrict(strict)) {
+      return this.link.get(`composes/${requestedRanch}`);
+    }
+
+    return composesSchema.parse(
+      await this.link.get(`composes/${requestedRanch}`)
+    );
   }
 
-  async about(): Promise<About> {
-    return this.link.get('about', aboutSchema);
+  async about(): Promise<About>;
+  async about(strict: boolean): Promise<unknown>;
+  async about(strict?: boolean): Promise<unknown> {
+    if (!this.isStrict(strict)) {
+      return this.link.get('about');
+    }
+
+    return aboutSchema.parse(await this.link.get('about'));
+  }
+
+  private isStrict(strict: boolean | undefined) {
+    return strict === undefined || strict;
   }
 }
