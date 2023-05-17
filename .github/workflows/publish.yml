@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
 
       - name: Use Node.js 18
-        uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
+        uses: actions/setup-node@a9893b0cfb0821c9c7b5fec28a6a2e6cdd5e20a4
         with:
           node-version: 18
           cache: yarn
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
 
       - name: Use Node.js 18
-        uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
+        uses: actions/setup-node@a9893b0cfb0821c9c7b5fec28a6a2e6cdd5e20a4
         with:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
@@ -69,7 +69,7 @@ jobs:
       - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
 
       - name: Use Node.js 18
-        uses: actions/setup-node@a4fcaaf314b117a40d694a35ee36461f8ff3c6e6
+        uses: actions/setup-node@a9893b0cfb0821c9c7b5fec28a6a2e6cdd5e20a4
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org/
