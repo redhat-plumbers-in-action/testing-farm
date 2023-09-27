@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@f095bcc56b7c2baf48f3ac70d6d6782f4f553222
 
       - name: Use Node.js 18.x
-        uses: actions/setup-node@869f4dd0c7f320ae834c2724d92a364de3893c24
+        uses: actions/setup-node@72c43c2d8fa01b0e1ca5fc3f8cb258c8d8bd286d
         with:
           node-version: 18
           cache: yarn
