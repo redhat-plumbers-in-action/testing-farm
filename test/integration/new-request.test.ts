@@ -19,7 +19,7 @@ describe('Test Testing Farm POST /requests', () => {
       test: {},
     });
     await expect(response).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"{\\"errors\\":{\\"test\\":\\"Only one of test type \'fmf\', \'script\' or \'sti\' can be specified in \'test\' field.\\"}}"'
+      "\"{\\\"errors\\\":{\\\"test\\\":\\\"Only one of test type 'fmf', 'tmt', 'script' or 'sti' can be specified in 'test' field.\\\"}}\""
     );
   });
 });
