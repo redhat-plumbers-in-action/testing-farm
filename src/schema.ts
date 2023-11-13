@@ -158,7 +158,7 @@ export const requestSchema = z.object({
   result: z.object({
     summary: z.union([z.string(), z.null()]),
     overall: z.string(),
-    xunit: z.string(),
+    xunit: z.string().nullable(),
   }),
   run: z.object({
     console: z.union([urlSchema, z.null()]),
