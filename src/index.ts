@@ -36,6 +36,10 @@ export {
   aboutSchema,
   newRequestResponseSchema,
   requestSchema,
+  urlSchema,
+  ranchSchema,
+  newRequestSchema,
+  requestIdSchema,
 };
 
 export default class TestingFarmAPI {
