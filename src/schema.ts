@@ -9,7 +9,7 @@ const testObjectSchema = z.object({
     .object({
       url: urlSchema,
       ref: z.string().min(1).optional(),
-      merge_sha: z.string().min(1).optional(),
+      merge_sha: z.string().min(1).optional().nullable(),
       path: z.string().min(1).optional(),
       name: z.string().min(1).optional(),
       settings: z
@@ -27,7 +27,8 @@ const testObjectSchema = z.object({
       playbooks: z.array(z.string().min(1)).optional(),
       extra_variables: z.record(z.string()).optional(),
     })
-    .optional(),
+    .optional()
+    .nullable(),
 });
 
 const environmentSchema = z.object({
@@ -37,7 +38,7 @@ const environmentSchema = z.object({
       compose: z.string().min(1),
     })
     .optional(),
-  pool: z.string().min(1).optional(),
+  pool: z.string().min(1).optional().nullable(),
   variables: z.record(z.string()).optional(),
   secrets: z.record(z.string()).optional(),
   artifacts: z
@@ -56,20 +57,23 @@ const environmentSchema = z.object({
         size: z.string().min(1),
       }),
     })
-    .optional(),
+    .optional()
+    .nullable(),
   settings: z
     .object({
       pipeline: z
         .object({
           skip_guest_setup: z.boolean().optional(),
         })
-        .optional(),
+        .optional()
+        .nullable(),
       provisioning: z
         .object({
           post_install_script: z.string().min(1).optional(),
           tags: z.record(z.string()).optional(),
         })
-        .optional(),
+        .optional()
+        .nullable(),
     })
     .optional(),
   tmt: z
@@ -80,9 +84,11 @@ const environmentSchema = z.object({
           arch: z.string().min(1),
           trigger: z.string().min(1),
         })
-        .optional(),
+        .optional()
+        .nullable(),
     })
     .optional(),
+  kickstart: z.any().optional(),
 });
 
 const notificationSchema = z.object({
@@ -111,8 +117,8 @@ export const newRequestSchema = z.object({
   api_key: z.string().min(1),
   test: testObjectSchema,
   environments: z.array(environmentSchema).optional(),
-  notification: notificationSchema.optional(),
-  settings: settingsSchema.optional(),
+  notification: notificationSchema.optional().nullable(),
+  settings: settingsSchema.optional().nullable(),
 });
 
 export type NewRequest = z.infer<typeof newRequestSchema>;
@@ -148,7 +154,7 @@ export const requestSchema = z.object({
         provisioning: z.any(),
       }),
       tmt: z.object({
-        context: z.object({}),
+        context: z.object({}).nullable(),
       }),
       variables: z.record(z.string()),
     })
