@@ -14,7 +14,7 @@
     "update-snapshots": "vitest run --update",
     "all": "yarn run build && yarn run format && yarn run lint && yarn test"
   },
-  "packageManager": "yarn@3.6.4",
+  "packageManager": "yarn@4.0.2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redhat-plumbers-in-action/testing-farm.git"
