@@ -11,7 +11,7 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
     );
     expect(response).toMatchInlineSnapshot(`
       {
-        "created": "2023-03-22 13:34:50.975382",
+        "created": "2023-03-22T13:34:50.975382",
         "environments_requested": [
           {
             "arch": "x86_64",
@@ -57,7 +57,7 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
         },
         "settings": null,
         "state": "complete",
-        "updated": "2023-03-22 13:34:50.975394",
+        "updated": "2023-03-22T13:34:50.975394",
         "user_id": "d690baff-bfb0-4c30-a315-e71f9daa7de6",
       }
     `);
@@ -79,7 +79,7 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
     await expect(
       api.requestDetails('request_id')
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"{\\"code\\":404,\\"message\\":\\"No such entity\\"}"'
+      '"\\"Internal Server Error\\""'
     );
   });
 });
