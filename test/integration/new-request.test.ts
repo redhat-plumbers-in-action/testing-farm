@@ -1,4 +1,4 @@
-import { expect, test, describe } from 'vitest';
+import { test, describe, expect } from 'vitest';
 
 import TestingFarmAPI from '../../src/index';
 
@@ -11,7 +11,7 @@ describe('Test Testing Farm POST /requests', () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
   });
 
-  test('bad API key', async () => {
+  test('bad request', async () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
 
     const response = api.newRequest({
@@ -19,7 +19,7 @@ describe('Test Testing Farm POST /requests', () => {
       test: {},
     });
     await expect(response).rejects.toThrowErrorMatchingInlineSnapshot(
-      "\"{\\\"errors\\\":{\\\"test\\\":\\\"Only one of test type 'fmf', 'tmt', 'script' or 'sti' can be specified in 'test' field.\\\"}}\""
+      '"{\\"message\\":\\"Test section is empty or test type is wrong.\\"}"'
     );
   });
 });
