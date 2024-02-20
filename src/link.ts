@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { URL } from 'url';
-import { z, ZodSchema } from 'zod';
 
 async function performRequest(config: AxiosRequestConfig): Promise<unknown> {
   try {
@@ -53,6 +52,15 @@ export abstract class TestingFarmLink {
       headers: {
         'Content-Type': 'application/json',
       },
+    };
+
+    return this.request(config);
+  }
+
+  async delete(path: string): Promise<unknown> {
+    const config: AxiosRequestConfig = {
+      url: this.buildURL(path).toString(),
+      method: 'DELETE',
     };
 
     return this.request(config);
