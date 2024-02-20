@@ -123,7 +123,7 @@ export const requestsFilterSchema = z.object({
 export type RequestsFilter = z.infer<typeof requestsFilterSchema>;
 
 export const newRequestSchema = z.object({
-  api_key: z.string().min(1),
+  api_key: z.any(),
   test: testObjectSchema,
   environments: z.array(environmentSchema).optional(),
   notification: notificationSchema.optional().nullable(),
@@ -196,7 +196,7 @@ export const requestSchema = z.object({
 export type Request = z.infer<typeof requestSchema>;
 
 export const cancelRequestSchema = z.object({
-  api_key: z.string().min(1),
+  api_key: z.any(),
 });
 
 export type CancelRequest = z.infer<typeof cancelRequestSchema>;
