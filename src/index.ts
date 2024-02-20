@@ -10,6 +10,7 @@ import {
   ErrorResponse,
   CancelRequestResponse,
   cancelRequestResponseSchema,
+  RequestsFilter,
 } from './schema';
 import {
   composesSchema,
@@ -49,6 +50,16 @@ export default class TestingFarmAPI {
 
   constructor(instance: string) {
     this.link = new PublicLink(urlSchema.parse(instance));
+  }
+
+  async requests(filter: RequestsFilter): Promise<Request[]>;
+  async requests(filter: RequestsFilter, strict: boolean): Promise<unknown>;
+  async requests(filter: RequestsFilter, strict?: boolean): Promise<unknown> {
+    if (!this.isStrict(strict)) {
+      return this.link.get('requests', filter);
+    }
+
+    return requestSchema.array().parse(await this.link.get('requests', filter));
   }
 
   async newRequest(request: NewRequest): Promise<NewRequestResponse>;
