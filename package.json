@@ -15,7 +15,7 @@
     "all": "yarn run build && yarn run format && yarn run lint && yarn test"
   },
   "type": "module",
-  "packageManager": "yarn@4.0.2",
+  "packageManager": "yarn@4.1.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/redhat-plumbers-in-action/testing-farm.git"
