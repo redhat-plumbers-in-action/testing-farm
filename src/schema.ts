@@ -195,6 +195,12 @@ export const requestSchema = z.object({
 
 export type Request = z.infer<typeof requestSchema>;
 
+export const cancelRequestSchema = z.object({
+  api_key: z.string().min(1),
+});
+
+export type CancelRequest = z.infer<typeof cancelRequestSchema>;
+
 // TODO: make
 export const cancelRequestResponseSchema = z.object({
   id: requestIdSchema,
