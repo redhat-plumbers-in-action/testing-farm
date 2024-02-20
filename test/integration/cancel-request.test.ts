@@ -7,7 +7,8 @@ describe('Test Testing Farm DELETE /requests/{request_id}', () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
 
     const response = await api.cancelRequest(
-      'f053796b-452e-4da2-b4e1-26eb2f3e721f'
+      'f053796b-452e-4da2-b4e1-26eb2f3e721f',
+      { api_key: 'api_key' }
     );
     expect(response).toMatchInlineSnapshot();
   });
@@ -17,6 +18,7 @@ describe('Test Testing Farm DELETE /requests/{request_id}', () => {
 
     const response = await api.cancelRequest(
       'f053796b-452e-4da2-b4e1-26eb2f3e721f',
+      { api_key: 'api_key' },
       false
     );
     expect(response).toBeTypeOf('object');
@@ -26,9 +28,9 @@ describe('Test Testing Farm DELETE /requests/{request_id}', () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
 
     await expect(
-      api.cancelRequest('request_id')
+      api.cancelRequest('request_id', { api_key: 'api_key' })
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: {"detail":[{"loc":["body"],"msg":"field required","type":"value_error.missing"}]}]`
+      `[Error: "Internal Server Error"]`
     );
   });
 });

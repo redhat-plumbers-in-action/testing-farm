@@ -11,6 +11,8 @@ import {
   CancelRequestResponse,
   cancelRequestResponseSchema,
   RequestsFilter,
+  CancelRequest,
+  cancelRequestSchema,
 } from './schema';
 import {
   composesSchema,
@@ -88,17 +90,29 @@ export default class TestingFarmAPI {
     return requestSchema.parse(await this.link.get(`requests/${id}`));
   }
 
-  async cancelRequest(requestId: string): Promise<CancelRequestResponse>;
-  async cancelRequest(requestId: string, strict: boolean): Promise<unknown>;
-  async cancelRequest(requestId: string, strict?: boolean): Promise<unknown> {
+  async cancelRequest(
+    requestId: string,
+    request: CancelRequest
+  ): Promise<CancelRequestResponse>;
+  async cancelRequest(
+    requestId: string,
+    request: CancelRequest,
+    strict: boolean
+  ): Promise<unknown>;
+  async cancelRequest(
+    requestId: string,
+    request: CancelRequest,
+    strict?: boolean
+  ): Promise<unknown> {
     const id = requestIdSchema.parse(requestId);
+    const data = cancelRequestSchema.parse(request);
 
     if (!this.isStrict(strict)) {
-      return this.link.delete(`requests/${id}`);
+      return this.link.delete(`requests/${id}`, data);
     }
 
     return cancelRequestResponseSchema.parse(
-      await this.link.delete(`requests/${id}`)
+      await this.link.delete(`requests/${id}`, data)
     );
   }
 
