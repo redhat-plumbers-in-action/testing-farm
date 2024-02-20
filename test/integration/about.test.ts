@@ -21,7 +21,7 @@ describe('Test Testing Farm GET /about', () => {
     const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.0');
 
     await expect(api.about()).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"{\\"detail\\":\\"Not Found\\"}"'
+      `[Error: {"detail":"Not Found"}]`
     );
   });
 });

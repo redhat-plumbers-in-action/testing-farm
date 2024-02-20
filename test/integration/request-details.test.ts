@@ -79,7 +79,7 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
     await expect(
       api.requestDetails('request_id')
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"\\"Internal Server Error\\""'
+      `[Error: "Internal Server Error"]`
     );
   });
 });
