@@ -17,7 +17,7 @@
 [codecov]: https://app.codecov.io/gh/redhat-plumbers-in-action/testing-farm
 [codecov-status]: https://codecov.io/github/redhat-plumbers-in-action/testing-farm/branch/main/graph/badge.svg?token=EqTfXgwKz2
 
-Typesafe access to [Testing Farm's REST API](https://testing-farm.gitlab.io/api/).
+Typesafe access to [Testing Farm's REST API](https://api.dev.testing-farm.io/redoc).
 
 ## API
 
@@ -32,10 +32,10 @@ await api.about();
 
 ### Request a New Test
 
-documentation of - [`POST /requests`](https://testing-farm.gitlab.io/api/#operation/requestsPost)
+documentation of - [`POST /requests`](https://api.dev.testing-farm.io/redoc#operation/request_a_new_test_v0_1_requests_post)
 
 ```typescript
-const request = { /* https://testing-farm.gitlab.io/api/#operation/requestsPost */ }
+const request = { /* https://api.dev.testing-farm.io/redoc#operation/request_a_new_test_v0_1_requests_post */ }
 
 const response: NewRequestResponse = await api.newRequest(request);
 const response: unknown = await api.newRequest(request, false);
@@ -43,7 +43,7 @@ const response: unknown = await api.newRequest(request, false);
 
 ### Test Request Details
 
-documentation of - [`GET /requests/{request_id}`](https://testing-farm.gitlab.io/api/#operation/requestsGet)
+documentation of - [`GET /requests/{request_id}`](https://api.dev.testing-farm.io/redoc#operation/test_request_details_v0_1_requests__request_id__get)
 
 ```typescript
 const details: Request = await api.requestDetails('test-id');
@@ -52,7 +52,7 @@ const details: unknown = await api.requestDetails('test-id', false);
 
 ### Composes Public Ranch
 
-documentation of - [`GET /composes`](https://testing-farm.gitlab.io/api/#operation/composesGetPublic)
+documentation of - [`GET /composes`](https://api.dev.testing-farm.io/redoc#operation/supported_composes_v0_1_composes_get)
 
 ```typescript
 const composes: Composes = await api.composes();
@@ -61,7 +61,7 @@ const composes: unknown = await api.composes(false);
 
 ### Composes
 
-documentation of - [`GET /composes/{ranch}`](https://testing-farm.gitlab.io/api/#operation/composesGet)
+documentation of - [`GET /composes/{ranch}`](https://api.dev.testing-farm.io/redoc#operation/supported_composes_v0_1_composes_get)
 
 ```typescript
 const composes: Composes = await api.ranchComposes('public');
@@ -70,7 +70,7 @@ const composes: unknown = await api.ranchComposes('public', false);
 
 ### About Testing Farm
 
-documentation of - [`GET /about`](https://testing-farm.gitlab.io/api/#operation/aboutGet)
+documentation of - [`GET /about`](https://api.dev.testing-farm.io/redoc#operation/get_about_v0_1_about_get)
 
 ```typescript
 const about: About = await api.about();
