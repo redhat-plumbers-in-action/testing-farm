@@ -82,10 +82,14 @@ export abstract class TestingFarmLink {
     return this.request(config);
   }
 
-  async delete(path: string): Promise<unknown> {
+  async delete<D>(path: string, data: D): Promise<unknown> {
     const config: AxiosRequestConfig = {
       url: this.buildURL(path).toString(),
       method: 'DELETE',
+      data,
+      headers: {
+        'Content-Type': 'application/json',
+      },
     };
 
     return this.request(config);
