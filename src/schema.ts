@@ -186,6 +186,16 @@ export const requestSchema = z.object({
 
 export type Request = z.infer<typeof requestSchema>;
 
+// TODO: make
+export const cancelRequestResponseSchema = z.object({
+  id: requestIdSchema,
+  state: z.string(),
+  created: z.string(),
+  updated: z.string(),
+});
+
+export type CancelRequestResponse = z.infer<typeof cancelRequestResponseSchema>;
+
 export const ranchSchema = z.union([z.literal('public'), z.literal('redhat')]);
 
 export type Ranch = z.infer<typeof ranchSchema>;

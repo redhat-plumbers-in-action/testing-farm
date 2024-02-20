@@ -50,6 +50,15 @@ const details: Request = await api.requestDetails('test-id');
 const details: unknown = await api.requestDetails('test-id', false);
 ```
 
+### Cancel a Test Request
+
+documentation of - [`DELETE /requests/{request_id}`](https://api.dev.testing-farm.io/redoc#operation/delete_test_request_v0_1_requests__request_id__delete)
+
+```typescript
+const response: CancelRequestResponse = await cancelRequest('test-id');
+const response: unknown = await cancelRequest('test-id', false);
+```
+
 ### Composes Public Ranch
 
 documentation of - [`GET /composes`](https://api.dev.testing-farm.io/redoc#operation/supported_composes_v0_1_composes_get)

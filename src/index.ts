@@ -8,6 +8,8 @@ import {
   Ranch,
   Request,
   ErrorResponse,
+  CancelRequestResponse,
+  cancelRequestResponseSchema,
 } from './schema';
 import {
   composesSchema,
@@ -73,6 +75,20 @@ export default class TestingFarmAPI {
     }
 
     return requestSchema.parse(await this.link.get(`requests/${id}`));
+  }
+
+  async cancelRequest(requestId: string): Promise<CancelRequestResponse>;
+  async cancelRequest(requestId: string, strict: boolean): Promise<unknown>;
+  async cancelRequest(requestId: string, strict?: boolean): Promise<unknown> {
+    const id = requestIdSchema.parse(requestId);
+
+    if (!this.isStrict(strict)) {
+      return this.link.delete(`requests/${id}`);
+    }
+
+    return cancelRequestResponseSchema.parse(
+      await this.link.delete(`requests/${id}`)
+    );
   }
 
   async composes(): Promise<Composes>;
