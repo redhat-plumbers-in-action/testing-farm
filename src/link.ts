@@ -48,9 +48,21 @@ export abstract class TestingFarmLink {
     return url;
   }
 
-  async get(path: string): Promise<unknown> {
+  async get(path: string): Promise<unknown>;
+  async get<P extends Record<string, string>>(
+    path: string,
+    searchParams: P
+  ): Promise<unknown>;
+  async get<P extends Record<string, string>>(
+    path: string,
+    searchParams?: P
+  ): Promise<unknown> {
+    const url = searchParams
+      ? this.buildURL(path, searchParams)
+      : this.buildURL(path);
+
     const config: AxiosRequestConfig = {
-      url: this.buildURL(path).toString(),
+      url: url.toString(),
       method: 'GET',
     };
 

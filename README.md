@@ -30,6 +30,17 @@ const api = new TestingFarmAPI("https://api.dev.testing-farm.io/v0.1");
 await api.about();
 ```
 
+### List a Test Requests
+
+documentation of - [`GET /requests`](https://api.dev.testing-farm.io/redoc#operation/get_test_requests_v0_1_requests_get)
+
+```typescript
+const queryParams = { /* https://api.dev.testing-farm.io/redoc#operation/get_test_requests_v0_1_requests_get */ }
+
+const requests: Requests[] = await api.requests(queryParams);
+const requests: unknown = await api.requests(queryParams, false);
+```
+
 ### Request a New Test
 
 documentation of - [`POST /requests`](https://api.dev.testing-farm.io/redoc#operation/request_a_new_test_v0_1_requests_post)

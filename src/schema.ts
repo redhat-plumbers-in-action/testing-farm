@@ -113,6 +113,15 @@ const settingsSchema = z.object({
     .optional(),
 });
 
+export const requestsFilterSchema = z.object({
+  state: z.string(),
+  user_id: z.string(),
+  created_before: z.string(),
+  created_after: z.string(),
+});
+
+export type RequestsFilter = z.infer<typeof requestsFilterSchema>;
+
 export const newRequestSchema = z.object({
   api_key: z.string().min(1),
   test: testObjectSchema,
