@@ -19,7 +19,7 @@ describe('Test Testing Farm POST /requests', () => {
       test: {},
     });
     await expect(response).rejects.toThrowErrorMatchingInlineSnapshot(
-      '"{\\"message\\":\\"Test section is empty or test type is wrong.\\"}"'
+      `[Error: {"message":"Test section is empty or test type is wrong."}]`
     );
   });
 });

@@ -29,39 +29,39 @@ describe('Test Testing Farm GET /composes/{ranch}', () => {
 
     await expect(api.ranchComposes('my-ranch' as Ranch)).rejects
       .toThrowErrorMatchingInlineSnapshot(`
-      "[
+      [ZodError: [
         {
-          \\"code\\": \\"invalid_union\\",
-          \\"unionErrors\\": [
+          "code": "invalid_union",
+          "unionErrors": [
             {
-              \\"issues\\": [
+              "issues": [
                 {
-                  \\"received\\": \\"my-ranch\\",
-                  \\"code\\": \\"invalid_literal\\",
-                  \\"expected\\": \\"public\\",
-                  \\"path\\": [],
-                  \\"message\\": \\"Invalid literal value, expected \\\\\\"public\\\\\\"\\"
+                  "received": "my-ranch",
+                  "code": "invalid_literal",
+                  "expected": "public",
+                  "path": [],
+                  "message": "Invalid literal value, expected \\"public\\""
                 }
               ],
-              \\"name\\": \\"ZodError\\"
+              "name": "ZodError"
             },
             {
-              \\"issues\\": [
+              "issues": [
                 {
-                  \\"received\\": \\"my-ranch\\",
-                  \\"code\\": \\"invalid_literal\\",
-                  \\"expected\\": \\"redhat\\",
-                  \\"path\\": [],
-                  \\"message\\": \\"Invalid literal value, expected \\\\\\"redhat\\\\\\"\\"
+                  "received": "my-ranch",
+                  "code": "invalid_literal",
+                  "expected": "redhat",
+                  "path": [],
+                  "message": "Invalid literal value, expected \\"redhat\\""
                 }
               ],
-              \\"name\\": \\"ZodError\\"
+              "name": "ZodError"
             }
           ],
-          \\"path\\": [],
-          \\"message\\": \\"Invalid input\\"
+          "path": [],
+          "message": "Invalid input"
         }
-      ]"
+      ]]
     `);
   });
 });
