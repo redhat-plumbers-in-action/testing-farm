@@ -80,9 +80,9 @@ const environmentSchema = z.object({
     .object({
       context: z
         .object({
-          distro: z.string().min(1),
-          arch: z.string().min(1),
-          trigger: z.string().min(1),
+          distro: z.string().min(1).optional(),
+          arch: z.string().min(1).optional(),
+          trigger: z.string().min(1).optional(),
         })
         .optional()
         .nullable(),
