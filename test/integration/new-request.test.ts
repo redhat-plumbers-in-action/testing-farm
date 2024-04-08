@@ -22,4 +22,17 @@ describe('Test Testing Farm POST /requests', () => {
       `[Error: {"message":"Test section is empty or test type is wrong."}]`
     );
   });
+  test('unsafe request', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+
+    const response = api.unsafeNewRequest({
+      api_key: 'api_key',
+      test: {},
+      environments: [
+        {
+          hardware: '{"something":"foobar"}',
+        },
+      ],
+    });
+  });
 });
