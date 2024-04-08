@@ -97,6 +97,66 @@ const environmentSchema = z.object({
   kickstart: z.any().optional(),
 });
 
+const environmentHardwareUnsafeSchema = z.object({
+  arch: z.string().min(1),
+  os: z
+    .object({
+      compose: z.string().min(1),
+    })
+    .optional(),
+  pool: z.string().min(1).optional().nullable(),
+  variables: z.record(z.string()).optional(),
+  secrets: z.record(z.string()).optional(),
+  artifacts: z
+    .array(
+      z.object({
+        id: z.string().min(1),
+        type: z.string().min(1),
+        packages: z.array(z.string().min(1)).optional(),
+      })
+    )
+    .optional(),
+  hardware: z.any()
+    .optional()
+    .nullable(),
+  settings: z
+    .object({
+      pipeline: z
+        .object({
+          skip_guest_setup: z.boolean().optional(),
+        })
+        .optional()
+        .nullable(),
+      provisioning: z
+        .object({
+          post_install_script: z.string().min(1).optional(),
+          tags: z.record(z.string()).optional(),
+        })
+        .optional()
+        .nullable(),
+    })
+    .optional(),
+  tmt: z
+    .object({
+      // https://tmt.readthedocs.io/en/stable/spec/context.html#dimension
+      context: z
+        .object({
+          distro: z.string().min(1).optional(),
+          variant: z.string().min(1).optional(),
+          arch: z.string().min(1).optional(),
+          component: z.string().min(1).optional(),
+          collection: z.string().min(1).optional(),
+          module: z.string().min(1).optional(),
+          initiator: z.string().min(1).optional(),
+          trigger: z.string().min(1).optional(),
+        })
+        .optional()
+        .nullable(),
+    })
+    .optional(),
+  kickstart: z.any().optional(),
+});
+
 const notificationSchema = z.object({
   webhook: z
     .object({
@@ -136,7 +196,15 @@ export const newRequestSchema = z.object({
   settings: settingsSchema.optional().nullable(),
 });
 
+export const newUnsafeRequestSchema = z.object({
+  api_key: z.any(),
+  test: testObjectSchema,
+  environments: z.array(environmentHardwareUnsafeSchema).optional(),
+  notification: notificationSchema.optional().nullable(),
+  settings: settingsSchema.optional().nullable(),
+});
 export type NewRequest = z.infer<typeof newRequestSchema>;
+export type NewUnsafeRequest = z.infer<typeof newUnsafeRequestSchema>;
 
 export const newRequestResponseSchema = z.object({
   id: requestIdSchema,

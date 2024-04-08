@@ -4,6 +4,7 @@ import {
   About,
   Composes,
   NewRequest,
+  NewUnsafeRequest,
   NewRequestResponse,
   Ranch,
   Request,
@@ -21,6 +22,7 @@ import {
   ranchSchema,
   newRequestResponseSchema,
   newRequestSchema,
+  newUnsafeRequestSchema,
   requestIdSchema,
   requestSchema,
 } from './schema';
@@ -29,6 +31,7 @@ export type {
   Ranch,
   NewRequest,
   NewRequestResponse,
+  NewUnsafeRequest,
   Request,
   Composes,
   About,
@@ -44,6 +47,7 @@ export {
   urlSchema,
   ranchSchema,
   newRequestSchema,
+  newUnsafeRequestSchema,
   requestIdSchema,
 };
 
@@ -66,6 +70,12 @@ export default class TestingFarmAPI {
 
   async newRequest(request: NewRequest): Promise<NewRequestResponse>;
   async newRequest(request: NewRequest, strict: boolean): Promise<unknown>;
+  async newUnsafeRequest(request: NewUnsafeRequest, strict: boolean): Promise<unknown> {
+    const data = newUnsafeRequestSchema.parse(request);
+    return newRequestResponseSchema.parse(
+        await this.link.post('requests', data)
+    );
+  }
   async newRequest(request: NewRequest, strict?: boolean): Promise<unknown> {
     const data = newRequestSchema.parse(request);
 
