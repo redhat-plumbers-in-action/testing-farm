@@ -70,11 +70,8 @@ export default class TestingFarmAPI {
 
   async newRequest(request: NewRequest): Promise<NewRequestResponse>;
   async newRequest(request: NewRequest, strict: boolean): Promise<unknown>;
-  async newUnsafeRequest(request: NewUnsafeRequest, strict: boolean): Promise<unknown> {
-    const data = newUnsafeRequestSchema.parse(request);
-    return newRequestResponseSchema.parse(
-        await this.link.post('requests', data)
-    );
+  async unsafeNewRequest(request: unknown, strict: boolean): Promise<unknown> {
+    await this.link.post('requests', request)
   }
   async newRequest(request: NewRequest, strict?: boolean): Promise<unknown> {
     const data = newRequestSchema.parse(request);
