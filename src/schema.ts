@@ -116,9 +116,7 @@ const environmentHardwareUnsafeSchema = z.object({
       })
     )
     .optional(),
-  hardware: z.any()
-    .optional()
-    .nullable(),
+  hardware: z.any().optional().nullable(),
   settings: z
     .object({
       pipeline: z
