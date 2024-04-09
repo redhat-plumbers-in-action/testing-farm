@@ -50,6 +50,7 @@ const request = { /* https://api.dev.testing-farm.io/redoc#operation/request_a_n
 
 const response: NewRequestResponse = await api.newRequest(request);
 const response: unknown = await api.newRequest(request, false);
+const response: unknown = await.unsafeNewRequest(request);
 ```
 
 ### Test Request Details
