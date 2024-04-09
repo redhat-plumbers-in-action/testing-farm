@@ -79,9 +79,7 @@ export default class TestingFarmAPI {
   }
 
   async unsafeNewRequest(request: unknown): Promise<unknown> {
-    return newRequestResponseSchema.parse(
-      await this.link.post('requests', request)
-    );
+    return await this.link.post('requests', request);
   }
 
   async requestDetails(requestId: string): Promise<Request>;
