@@ -78,6 +78,10 @@ export default class TestingFarmAPI {
     );
   }
 
+  async unsafeNewRequest(request: unknown): Promise<unknown> {
+    return await this.link.post('requests', request);
+  }
+
   async requestDetails(requestId: string): Promise<Request>;
   async requestDetails(requestId: string, strict: boolean): Promise<unknown>;
   async requestDetails(requestId: string, strict?: boolean): Promise<unknown> {
