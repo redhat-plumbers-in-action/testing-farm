@@ -115,6 +115,9 @@ const settingsSchema = z.object({
   pipeline: z
     .object({
       timeout: z.number().min(1).optional(),
+      type: z.enum(['tmt-multihost']).optional(),
+      'provision-error-failed-result': z.boolean().optional(),
+      'parallel-limit': z.number().nonnegative().optional(),
     })
     .optional(),
 });
