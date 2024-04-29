@@ -13,6 +13,7 @@
     "update-snapshots": "vitest run --update",
     "all": "yarn run build && yarn run format && yarn test"
   },
+  "type": "module",
   "packageManager": "yarn@4.1.1",
   "repository": {
     "type": "git",
