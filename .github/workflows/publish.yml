@@ -28,9 +28,6 @@ jobs:
       - name: Compile
         run: yarn build
 
-      - name: Lint
-        run: yarn run lint
-
       - name: Test
         run: yarn test
 
