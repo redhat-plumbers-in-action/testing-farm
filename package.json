@@ -29,7 +29,7 @@
   "homepage": "https://github.com/redhat-plumbers-in-action/testing-farm#readme",
   "dependencies": {
     "axios": "1.6.8",
-    "zod": "3.23.4"
+    "zod": "3.23.5"
   },
   "devDependencies": {
     "@types/node": "20.12.7",
