@@ -17,6 +17,9 @@ const testObjectSchema = z.object({
           'recognize-errors': z.boolean(),
         })
         .optional(),
+      plan_filter: z.string().min(1).optional(),
+      test_name: z.string().min(1).optional(),
+      test_filter: z.string().min(1).optional(),
     })
     .optional(),
   sti: z
