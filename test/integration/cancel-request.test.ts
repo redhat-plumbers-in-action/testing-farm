@@ -14,11 +14,14 @@ describe('Test Testing Farm DELETE /requests/{request_id}', () => {
   });
 
   test.todo('unsafe response', async () => {
-    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+    const api = new TestingFarmAPI(
+      'https://api.dev.testing-farm.io/v0.1',
+      'api_key'
+    );
 
     const response = await api.cancelRequest(
       'f053796b-452e-4da2-b4e1-26eb2f3e721f',
-      { api_key: 'api_key' },
+      {},
       false
     );
     expect(response).toBeTypeOf('object');

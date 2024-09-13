@@ -26,9 +26,18 @@ Typesafe access to [Testing Farm's REST API](https://api.dev.testing-farm.io/red
 ```typescript
 import TestingFarmAPI from "testing-farm";
 
+const api = new TestingFarmAPI("https://api.dev.testing-farm.io/v0.1", "api-key");
+
+// Passing api key in data - not recommended
 const api = new TestingFarmAPI("https://api.dev.testing-farm.io/v0.1");
+
 await api.about();
 ```
+
+> [!WARNING]
+>
+> Passing the API key in request body is deprecated and not recommended. It is better to pass it in the constructor.
+> This way the API key will be passed in the request header as part of `Authorization` header.
 
 ### List a Test Requests
 

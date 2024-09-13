@@ -1,4 +1,4 @@
-import { PublicLink } from './link';
+import { ApiKeyLink, PublicLink, TestingFarmLink } from './link';
 import { isError } from './util';
 import {
   About,
@@ -46,10 +46,15 @@ export {
 };
 
 export default class TestingFarmAPI {
-  private readonly link: PublicLink;
+  private readonly link: TestingFarmLink;
 
-  constructor(instance: string) {
-    this.link = new PublicLink(new URL(instance));
+  constructor(instance: string, apiKey?: string) {
+    // Use PublicLink only for endpoints that don't require authentication
+    if (!apiKey) {
+      this.link = new PublicLink(new URL(instance));
+    } else {
+      this.link = new ApiKeyLink(new URL(instance), apiKey);
+    }
   }
 
   async requests(filter: RequestsFilter): Promise<Request[]>;
