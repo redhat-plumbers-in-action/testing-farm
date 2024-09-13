@@ -22,11 +22,7 @@ async function performRequest(config: AxiosRequestConfig): Promise<unknown> {
 }
 
 export abstract class TestingFarmLink {
-  protected readonly instance: URL;
-
-  constructor(instance: string) {
-    this.instance = new URL(instance);
-  }
+  constructor(protected readonly instance: URL) {}
 
   protected abstract request(config: AxiosRequestConfig): Promise<unknown>;
 
