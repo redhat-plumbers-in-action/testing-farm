@@ -17,7 +17,6 @@ import {
 import {
   composesSchema,
   aboutSchema,
-  urlSchema,
   ranchSchema,
   newRequestResponseSchema,
   newRequestSchema,
@@ -41,7 +40,6 @@ export {
   aboutSchema,
   newRequestResponseSchema,
   requestSchema,
-  urlSchema,
   ranchSchema,
   newRequestSchema,
   requestIdSchema,
@@ -51,7 +49,7 @@ export default class TestingFarmAPI {
   private readonly link: PublicLink;
 
   constructor(instance: string) {
-    this.link = new PublicLink(urlSchema.parse(instance));
+    this.link = new PublicLink(new URL(instance));
   }
 
   async requests(filter: RequestsFilter): Promise<Request[]>;
