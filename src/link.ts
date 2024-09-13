@@ -97,3 +97,30 @@ export class PublicLink extends TestingFarmLink {
     return performRequest(config);
   }
 }
+
+/**
+ * Handles authentication using an API key.
+ */
+export class ApiKeyLink extends TestingFarmLink {
+  public constructor(
+    instance: URL,
+    private readonly apiKey: string
+  ) {
+    super(instance);
+  }
+
+  protected async request(config: AxiosRequestConfig): Promise<unknown> {
+    return performRequest({
+      ...config,
+      headers: {
+        ...(config.headers ?? {}),
+        // https://api.dev.testing-farm.io/redoc#operation/request_a_new_test_v0_1_requests_post
+        // OAuth2: OAuth2PasswordBearer
+        // The API key for authentication.
+        // Flow type: password
+        // Token URL: token
+        Authorization: `Bearer ${this.apiKey}`,
+      },
+    });
+  }
+}
