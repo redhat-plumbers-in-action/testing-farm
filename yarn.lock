@@ -435,12 +435,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20.16.4":
-  version: 20.16.4
-  resolution: "@types/node@npm:20.16.4"
+"@types/node@npm:20.16.10":
+  version: 20.16.10
+  resolution: "@types/node@npm:20.16.10"
   dependencies:
     undici-types: "npm:~6.19.2"
-  checksum: 10c0/1dfd24b8a1552adf1f37c189bcebb6e287184852188d8aa28f8e955f15079f8ee62d88f142b6a52c0fd59132fc40644bf6197c139e4e1d645c1db040b231caaa
+  checksum: 10c0/c0c0c7ecb083ec638c2118e54b5242bb4c39a75608cbac9475cf15aaceb64b8bc997a87a0798e700a81d61651c8a7750ae0455be0f0996ada6e8b2bb818d90c5
   languageName: node
   linkType: hard
 
@@ -1902,7 +1902,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "testing-farm@workspace:."
   dependencies:
-    "@types/node": "npm:20.16.4"
+    "@types/node": "npm:20.16.10"
     "@vitest/coverage-v8": "npm:2.0.5"
     axios: "npm:1.7.4"
     prettier: "npm:3.3.3"
