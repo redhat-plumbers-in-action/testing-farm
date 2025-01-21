@@ -28,14 +28,14 @@
   },
   "homepage": "https://github.com/redhat-plumbers-in-action/testing-farm#readme",
   "dependencies": {
-    "axios": "1.7.7",
-    "zod": "3.23.8"
+    "axios": "1.7.9",
+    "zod": "3.24.1"
   },
   "devDependencies": {
-    "@types/node": "20.17.5",
-    "@vitest/coverage-v8": "2.0.5",
-    "prettier": "3.3.3",
-    "typescript": "5.6.3",
-    "vitest": "2.0.5"
+    "@types/node": "22.10.7",
+    "@vitest/coverage-v8": "3.0.2",
+    "prettier": "3.4.2",
+    "typescript": "5.7.3",
+    "vitest": "3.0.2"
   }
 }
