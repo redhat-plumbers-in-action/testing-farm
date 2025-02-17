@@ -33,7 +33,7 @@ describe('Test Testing Farm DELETE /requests/{request_id}', () => {
     await expect(
       api.cancelRequest('request_id', { api_key: 'api_key' })
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: "Internal Server Error"]`
+      `[Error: {"detail":[{"loc":["path","request_id"],"msg":"value is not a valid uuid","type":"type_error.uuid"}]}]`
     );
   });
 });
