@@ -48,7 +48,6 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
         "result": {
           "overall": "failed",
           "summary": null,
-          "xunit": null,
         },
         "run": {
           "artifacts": "https://artifacts.dev.testing-farm.io/f053796b-452e-4da2-b4e1-26eb2f3e721f",
@@ -79,7 +78,7 @@ describe('Test Testing Farm GET /requests/{request_id}', () => {
     await expect(
       api.requestDetails('request_id')
     ).rejects.toThrowErrorMatchingInlineSnapshot(
-      `[Error: "Internal Server Error"]`
+      `[Error: {"detail":[{"loc":["path","request_id"],"msg":"value is not a valid uuid","type":"type_error.uuid"}]}]`
     );
   });
 });
