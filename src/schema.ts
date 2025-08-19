@@ -40,7 +40,8 @@ const environmentSchema = z.object({
     .object({
       compose: z.string().min(1),
     })
-    .optional(),
+    .optional()
+    .nullable(),
   pool: z.string().min(1).optional().nullable(),
   variables: z.record(z.string()).optional(),
   secrets: z.record(z.string()).optional(),
