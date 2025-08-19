@@ -39,4 +39,27 @@ describe('Test Testing Farm POST /requests', () => {
       `[Error: {"message":"Test section is empty or test type is wrong."}]`
     );
   });
+
+  test('request with os null', async () => {
+    const api = new TestingFarmAPI('https://api.dev.testing-farm.io/v0.1');
+
+    const response = api.newRequest({
+      api_key: 'api_key',
+      test: {
+        fmf: {
+          url: 'https://github.com/example/repo',
+        },
+      },
+      environments: [
+        {
+          arch: 'x86_64',
+          os: null,
+        },
+      ],
+    });
+
+    await expect(response).rejects.toThrowErrorMatchingInlineSnapshot(
+      `[Error: {"message":"Not authorized to perform this action"}]`
+    );
+  });
 });
