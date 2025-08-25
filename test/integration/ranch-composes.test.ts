@@ -32,31 +32,27 @@ describe('Test Testing Farm GET /composes/{ranch}', () => {
       [ZodError: [
         {
           "code": "invalid_union",
-          "unionErrors": [
-            {
-              "issues": [
-                {
-                  "received": "my-ranch",
-                  "code": "invalid_literal",
-                  "expected": "public",
-                  "path": [],
-                  "message": "Invalid literal value, expected \\"public\\""
-                }
-              ],
-              "name": "ZodError"
-            },
-            {
-              "issues": [
-                {
-                  "received": "my-ranch",
-                  "code": "invalid_literal",
-                  "expected": "redhat",
-                  "path": [],
-                  "message": "Invalid literal value, expected \\"redhat\\""
-                }
-              ],
-              "name": "ZodError"
-            }
+          "errors": [
+            [
+              {
+                "code": "invalid_value",
+                "values": [
+                  "public"
+                ],
+                "path": [],
+                "message": "Invalid input: expected \\"public\\""
+              }
+            ],
+            [
+              {
+                "code": "invalid_value",
+                "values": [
+                  "redhat"
+                ],
+                "path": [],
+                "message": "Invalid input: expected \\"redhat\\""
+              }
+            ]
           ],
           "path": [],
           "message": "Invalid input"

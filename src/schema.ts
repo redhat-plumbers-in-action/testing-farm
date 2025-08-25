@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const urlSchema = z.string().url();
+export const urlSchema = z.url();
 
 export const requestIdSchema = z.string();
 
@@ -28,7 +28,7 @@ const testObjectSchema = z.object({
       ref: z.string().min(1),
       merge_sha: z.string().min(1).optional(),
       playbooks: z.array(z.string().min(1)).optional(),
-      extra_variables: z.record(z.string()).optional(),
+      extra_variables: z.record(z.string(), z.string()).optional(),
     })
     .optional()
     .nullable(),
@@ -43,8 +43,8 @@ const environmentSchema = z.object({
     .optional()
     .nullable(),
   pool: z.string().min(1).optional().nullable(),
-  variables: z.record(z.string()).optional(),
-  secrets: z.record(z.string()).optional(),
+  variables: z.record(z.string(), z.string()).optional(),
+  secrets: z.record(z.string(), z.string()).optional(),
   artifacts: z
     .array(
       z.object({
@@ -74,7 +74,7 @@ const environmentSchema = z.object({
       provisioning: z
         .object({
           post_install_script: z.string().min(1).optional(),
-          tags: z.record(z.string()).optional(),
+          tags: z.record(z.string(), z.string()).optional(),
         })
         .optional()
         .nullable(),
@@ -178,7 +178,7 @@ export const requestSchema = z.object({
       tmt: z.object({
         context: z.object({}).nullable(),
       }),
-      variables: z.record(z.string()),
+      variables: z.record(z.string(), z.string()),
     })
   ),
   state: z.string(),
