@@ -84,7 +84,7 @@ const environmentSchema = z.object({
     .object({
       // https://tmt.readthedocs.io/en/stable/spec/context.html#dimension
       context: z
-        .object({
+        .looseObject({
           distro: z.string().min(1).optional(),
           variant: z.string().min(1).optional(),
           arch: z.string().min(1).optional(),
@@ -176,7 +176,7 @@ export const requestSchema = z.object({
         provisioning: z.any(),
       }),
       tmt: z.object({
-        context: z.object({}).nullable(),
+        context: z.looseObject({}).nullable(),
       }),
       variables: z.record(z.string(), z.string()),
     })
