@@ -39,6 +39,15 @@ await api.about();
 > Passing the API key in request body is deprecated and not recommended. It is better to pass it in the constructor.
 > This way the API key will be passed in the request header as part of `Authorization` header.
 
+### Get the current user
+
+documentation of - [`GET /whoami`](https://api.dev.testing-farm.io/redoc#operation/get_whoami_v0_1_whoami_get)
+
+```typescript
+const whoami: WhoamiResponse = await api.whoami();
+const whoami: unknown = await api.whoami(false);
+```
+
 ### List a Test Requests
 
 documentation of - [`GET /requests`](https://api.dev.testing-farm.io/redoc#operation/get_test_requests_v0_1_requests_get)

@@ -1,5 +1,25 @@
 import { z } from 'zod';
 
+export const whoamiSchema = z.object({
+  token: z.looseObject({
+    enabled: z.boolean(),
+    id: z.string(),
+    name: z.string(),
+    ranch: z.union([z.literal('public'), z.literal('redhat')]),
+    role: z.string(),
+    user_id: z.string(),
+  }),
+  user: z.looseObject({
+    auth_id: z.string(),
+    auth_method: z.string(),
+    auth_name: z.string(),
+    enabled: z.boolean(),
+    id: z.string(),
+  }),
+});
+
+export type WhoamiResponse = z.infer<typeof whoamiSchema>;
+
 export const urlSchema = z.url();
 
 export const requestIdSchema = z.string();
