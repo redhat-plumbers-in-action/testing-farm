@@ -13,6 +13,8 @@ import {
   RequestsFilter,
   CancelRequest,
   cancelRequestSchema,
+  WhoamiResponse,
+  whoamiSchema,
 } from './schema';
 import {
   composesSchema,
@@ -32,6 +34,7 @@ export type {
   Composes,
   About,
   ErrorResponse,
+  WhoamiResponse,
 };
 
 export {
@@ -43,6 +46,7 @@ export {
   ranchSchema,
   newRequestSchema,
   requestIdSchema,
+  whoamiSchema,
 };
 
 export default class TestingFarmAPI {
@@ -55,6 +59,16 @@ export default class TestingFarmAPI {
     } else {
       this.link = new ApiKeyLink(new URL(instance), apiKey);
     }
+  }
+
+  async whoami(): Promise<WhoamiResponse>;
+  async whoami(strict: boolean): Promise<unknown>;
+  async whoami(strict?: boolean): Promise<unknown> {
+    if (!this.isStrict(strict)) {
+      return this.link.get('whoami');
+    }
+
+    return whoamiSchema.parse(await this.link.get('whoami'));
   }
 
   async requests(filter: RequestsFilter): Promise<Request[]>;
