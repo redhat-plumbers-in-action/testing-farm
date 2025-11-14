@@ -3,7 +3,7 @@
 [![npm version][npm-status]][npm] [![Tests][test-status]][test] [![Linters][lint-status]][lint] [![CodeQL][codeql-status]][codeql] [![codecov][codecov-status]][codecov]
 
 [npm]: https://www.npmjs.com/package/testing-farm
-[npm-status]: https://badgen.net/npm/v/testing-farm
+[npm-status]: https://img.shields.io/npm/v/testing-farm
 
 [test]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/tests.yml
 [test-status]: https://github.com/redhat-plumbers-in-action/testing-farm/actions/workflows/tests.yml/badge.svg
