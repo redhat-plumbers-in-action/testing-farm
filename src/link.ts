@@ -114,7 +114,7 @@ export class ApiKeyLink extends TestingFarmLink {
       ...config,
       headers: {
         ...(config.headers ?? {}),
-        // https://api.dev.testing-farm.io/redoc#operation/request_a_new_test_v0_1_requests_post
+        // https://api.dev.testing-farm.io/docs#/default/request_a_new_test_v0_1_requests_post
         // OAuth2: OAuth2PasswordBearer
         // The API key for authentication.
         // Flow type: password
