@@ -76,7 +76,7 @@
   "exclude": [
     "node_modules/",
     "**/*.test.ts",
-    "jest.config.ts"
+    "vitest.config.ts"
   ]                                           /* Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later. */,
   "compileOnSave": true                       /* Enable Compile-on-Save for this project. */
 }
