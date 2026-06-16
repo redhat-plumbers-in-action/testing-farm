@@ -35,7 +35,7 @@
     "@types/node": "24.13.2",
     "@vitest/coverage-v8": "4.0.18",
     "prettier": "3.8.4",
-    "typescript": "5.9.3",
+    "typescript": "6.0.3",
     "vitest": "4.0.18"
   }
 }
